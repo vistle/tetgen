@@ -6625,25 +6625,25 @@ REAL tetgenmesh::interiorangle(REAL* o, REAL* p1, REAL* p2, REAL* n)
 
 REAL tetgenmesh::cos_interiorangle(REAL* o, REAL* p1, REAL* p2)
 {
-  REAL v1[3], v2[3], np[3];
-  REAL theta, costheta, lenlen;
-  REAL ori, len1, len2;
+    REAL v1[3], v2[3];
+    REAL costheta, lenlen;
+    REAL len1, len2;
 
-  // Get the interior angle (0 - PI) between o->p1, and o->p2.
-  v1[0] = p1[0] - o[0];
-  v1[1] = p1[1] - o[1];
-  v1[2] = p1[2] - o[2];
-  v2[0] = p2[0] - o[0];
-  v2[1] = p2[1] - o[1];
-  v2[2] = p2[2] - o[2];
-  len1 = sqrt(dot(v1, v1));
-  len2 = sqrt(dot(v2, v2));
-  lenlen = len1 * len2;
+    // Get the interior angle (0 - PI) between o->p1, and o->p2.
+    v1[0] = p1[0] - o[0];
+    v1[1] = p1[1] - o[1];
+    v1[2] = p1[2] - o[2];
+    v2[0] = p2[0] - o[0];
+    v2[1] = p2[1] - o[1];
+    v2[2] = p2[2] - o[2];
+    len1 = sqrt(dot(v1, v1));
+    len2 = sqrt(dot(v2, v2));
+    lenlen = len1 * len2;
 
-  costheta = dot(v1, v2) / lenlen;
+    costheta = dot(v1, v2) / lenlen;
 
-  if (costheta > 1.0) {
-    costheta = 1.0; // Roundoff.
+    if (costheta > 1.0) {
+        costheta = 1.0; // Roundoff.
   } else if (costheta < -1.0) {
     costheta = -1.0; // Roundoff.
   }
@@ -14100,7 +14100,7 @@ void tetgenmesh::unifysegments()
   point torg, tdest;
   REAL ori1, ori2; //, ori3;
   REAL n1[3], n2[3];
-  REAL cosang, ang, ang_tol;
+  REAL cosang, ang; //, ang_tol;
   int *idx2faclist;
   int idx, k, m;
 
@@ -19531,6 +19531,7 @@ int tetgenmesh::add_steinerpt_in_segment(face* misseg, int searchlevel, int& idi
     // An edge is intersected with the segment. Try to flip it.
     success = removeedgebyflips(&searchtet, &fc);
   }
+  (void) success;
 
   split = 0;
   for (i = 0; i < caveencseglist->objects; i++) {
@@ -21227,7 +21228,7 @@ int tetgenmesh::recoversubfaces(arraypool *misshlist, int steinerflag)
           }
 
           bool splitseg_flag = (splitseg != NULL);
-          int bak_iloc = ivf.iloc; // for collect_initial_cavity
+          //int bak_iloc = ivf.iloc; // for collect_initial_cavity
 
           if (insertpoint(steinerpt, &searchtet, &searchsh, splitseg, &ivf)) {
             if (flipstack != NULL) {
@@ -29331,6 +29332,7 @@ void tetgenmesh::delaunayrefinement()
             }
           }
         } // i
+        (void) badtetcount;
 
         unsplit_badtets->restart();
 
@@ -29657,6 +29659,7 @@ void tetgenmesh::delaunayrefinement()
         }
       } // i
       unsplit_badtets->restart();
+      (void)badtetcount;
 
 
       if (splitcount == 0) break;
@@ -32978,6 +32981,8 @@ void tetgenmesh::qualitystatistics()
 
     tetloop.tet = tetrahedrontraverse();
   }
+  (void)total_tet_vol;
+  (void)total_tetprism_vol;
 
   shortest = sqrt(shortest);
   longest = sqrt(longest);
@@ -33300,6 +33305,7 @@ void tetgenmesh::jettisonnodes()
   }
   dupverts = 0l;
   unuverts = 0l;
+  (void)remcount;
 
   // The following line ensures that dead items in the pool of nodes cannot
   //   be allocated for the new created nodes. This ensures that the input
@@ -35734,6 +35740,7 @@ void tetgenmesh::outmesh2medit(char* mfilename)
     //setelemindex(faceloop.sh, facidx);
     facidx++;   
     faceloop.sh = shellfacetraverse(subfaces);
+    (void)sub_count;
   }  
 
 
@@ -36564,4 +36571,3 @@ void tetrahedralize(char *switches, tetgenio *in, tetgenio *out,
 //                                                                            //
 //                                                                            //
 //== main_cxx ================================================================//
-
