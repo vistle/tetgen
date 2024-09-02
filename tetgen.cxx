@@ -26111,7 +26111,7 @@ REAL tetgenmesh::get_min_angle_at_ridge_vertex(face* seg)
 void tetgenmesh::create_segment_info_list()
 {
   face min_dihedral_ang_seg;
-  point min_face_ang_vertex;
+  point min_face_ang_vertex = NULL;
   REAL min_dihedral_ang = 360.;
   REAL min_face_ang = 360.;
   
@@ -26198,10 +26198,10 @@ void tetgenmesh::makefacetverticesmap()
   face subloop, neighsh, *parysh, *parysh1;
   point pa, *ppt, *parypt;
   verttype vt;
-  int facetindex, totalvertices;
+  unsigned long facetindex, totalvertices;
   unsigned long max_facet_size = 0l;
   int max_facet_idx = 0;
-  int i, j, k;
+  unsigned i, j, k;
 
   if (b->verbose) {
     printf("  Creating the facet vertices map.\n");
@@ -26264,8 +26264,8 @@ void tetgenmesh::makefacetverticesmap()
           senextself(*parysh);
         }
       } // i
-      totalvertices += (int) vertlist->objects;
-      if (max_facet_size < vertlist->objects) {
+      totalvertices += vertlist->objects;
+      if (max_facet_size < (unsigned long)vertlist->objects) {
         max_facet_size = vertlist->objects;
         max_facet_idx = facetindex;
       }
