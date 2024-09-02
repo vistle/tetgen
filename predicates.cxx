@@ -124,6 +124,9 @@
 #endif /* LINUX */
 
 #include "tetgen.h"            // Defines the symbol REAL (float or double).
+                               //
+
+/* #define ENABLE_UNUSED */
 
 #ifdef USE_CGAL_PREDICATES
   #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -881,6 +884,7 @@ int expansion_sum_zeroelim2(int elen, REAL *e, int flen, REAL *f, REAL *h)
 /*                                                                           */
 /*****************************************************************************/
 
+#ifdef ENABLE_UNUSED
 static int fast_expansion_sum(int elen, REAL *e, int flen, REAL *f, REAL *h)
 /* h cannot be e or f. */
 {
@@ -939,6 +943,7 @@ static int fast_expansion_sum(int elen, REAL *e, int flen, REAL *f, REAL *h)
   h[hindex] = Q;
   return hindex + 1;
 }
+#endif
 
 /*****************************************************************************/
 /*                                                                           */
@@ -1165,6 +1170,7 @@ int linear_expansion_sum_zeroelim(int elen, REAL *e, int flen, REAL *f,
 /*  will h.)                                                                 */
 /*                                                                           */
 /*****************************************************************************/
+#ifdef ENABLE_UNUSED
 static
 int scale_expansion(int elen, REAL *e, REAL b, REAL *h)
 /* e and h cannot be the same. */
@@ -1196,6 +1202,7 @@ int scale_expansion(int elen, REAL *e, REAL b, REAL *h)
   h[hindex] = Q;
   return elen + elen;
 }
+#endif
 
 /*****************************************************************************/
 /*                                                                           */
@@ -1263,6 +1270,7 @@ int scale_expansion_zeroelim(int elen, REAL *e, REAL b, REAL *h)
 /*  nonadjacent expansion.                                                   */
 /*                                                                           */
 /*****************************************************************************/
+#ifdef ENABLE_UNUSED
 static
 int compress(int elen, REAL *e, REAL *h)
 /* e and h may be the same. */
@@ -1298,6 +1306,7 @@ int compress(int elen, REAL *e, REAL *h)
   h[top] = Q;
   return top + 1;
 }
+#endif
 
 /*****************************************************************************/
 /*                                                                           */
@@ -1344,6 +1353,7 @@ REAL estimate(int elen, REAL *e)
 /*  nearly so.                                                               */
 /*                                                                           */
 /*****************************************************************************/
+#ifdef ENABLE_UNUSED
 static
 REAL orient2dfast(REAL *pa, REAL *pb, REAL *pc)
 {
@@ -1355,6 +1365,7 @@ REAL orient2dfast(REAL *pa, REAL *pb, REAL *pc)
   bcy = pb[1] - pc[1];
   return acx * bcy - acy * bcx;
 }
+#endif
 
 //static
 REAL orient2dexact(REAL *pa, REAL *pb, REAL *pc)
